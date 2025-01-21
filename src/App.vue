@@ -1,48 +1,30 @@
 <script setup>
+import { ref } from 'vue';
 
-import { computed, ref } from "vue";
-import ItemList from "./ItemList.vue";
+let modalActive = ref(false);
 
-let message = ref("");
-let i =1;
-let items = ref([
-    {id: i++, name: 'Sai', isDone: true}
-    {id: i++, name: 'Piim', isDone: false}
-    {id: i++, name: 'Viin', isDone: true}
-    {id: i++, name: 'Õlu', isDone: false}
-]);
+document.body.addEventListener('keypress', event => {
+    if(event.key === 'Escape'){
+        modalActive.value = false;};
+});
 
-
-function addItem(){
-    if(message.value.trim() !==''){
-    items.value.push({id: i++, name: message.value.trim(), isDone: false});
-    }
-    message.value = '';
-
-}
-
-let doneItems = computed(() => items.value.filter(item => item.isDone));
-let toDoItems = computed(() => items.value.filter(item => !item.isDone));
 
 </script>
 
 <template>
-    <div class="container mt-2">
-        <div class="field has-addons">
-            <div class="control">
-                <input class="input" type="text" v-model="message" @keypress.enter="addItem">
-            </div>
-            <div class="control">
-                <button class="button is-info" @click="addItem">
-                    Add item
-                </button>
-            </div>
+    <div class="container">
+        <section class="section">
+            <button class="button is-primary" @click="modalActive=true">Modal Active</button>
+        </section>
+    </div>
+    <div class="modal" :class="{'is-active' : modalActive}">
+        <div class="modal-background" @click="modalActive=false"></div>
+        <div class="modal-content">
+            <p class="image is-4by3">
+                <img src="https://bulma.io/assets/images/placeholders/1280x960.png" alt="">
+            </p>
         </div>
-        <div class="content">
-            <ItemList :item="items" title="All Items"></ItemList>
-            <ItemList :item="doneItems" title="Done Items"></ItemList>
-            <ItemList :item="toDoItems" title="ToDo Items"></ItemList>
-        </div>
+        <button class="modal-close is-large" aria-label="close" @click="modalActive=false"></button>
     </div>
 
 </template>
