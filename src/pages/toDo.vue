@@ -6,9 +6,9 @@ import ItemList from "./ItemList.vue";
 let message = ref("");
 let i =1;
 let items = ref([
-    {id: i++, name: 'Sai', isDone: true}
-    {id: i++, name: 'Piim', isDone: false}
-    {id: i++, name: 'Viin', isDone: true}
+    {id: i++, name: 'Sai', isDone: true},
+    {id: i++, name: 'Piim', isDone: false},
+    {id: i++, name: 'Viin', isDone: true},
     {id: i++, name: 'Õlu', isDone: false}
 ]);
 
